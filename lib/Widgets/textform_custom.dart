@@ -22,7 +22,7 @@ class TextFormFieldCustomized extends StatelessWidget {
             keyboardType: keyboardType,
             validator: validator,
             autovalidateMode: AutovalidateMode.onUserInteraction,
-            maxLines: 5,
+            maxLines: null,
             textAlignVertical: TextAlignVertical.center,
             decoration: InputDecoration(
               hintText: hintText,
