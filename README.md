@@ -2,7 +2,7 @@
 A Flutter-based mobile application that demonstrates the encryption and decryption of plaintext using three classic cryptographic algorithms: Vernam Cipher, Rail Fence Cipher, and Vigenere Cipher.
 
 ## 📱 Screenshots
-![Image](https://github.com/user-attachments/assets/dc84b5a6-cc37-4162-9eba-e886b9f7e60d)
+![Image](https://github.com/user-attachments/assets/6162db7e-eecc-4342-9d79-bbe3425dfd76)
 
 # Algorithms Implemented
 
@@ -48,15 +48,11 @@ Random key generation for Vernam Cipher.
 
 Smooth navigation between screens.
 
+State Management using Riverpod
+
+Use Pages and Tab Bar
+
 ## Fully offline functionality — no internet required.
-
-# 🧑‍💻 Team Members
-
-ID: 10 - Ayesha
-
-ID: 11 - Jawad
-
-ID: 34 - Ohi
 
 # 🛠️ Tech Stack
 
@@ -64,11 +60,9 @@ Framework: Flutter
 
 Language: Dart
 
-State Management: SetState (no external package)
+State Management: Riverpod
 
 IDE: Android Studio / VS Code
 
 # Download APP
 https://drive.google.com/drive/folders/1ur8LqIAQ7F9HOzccu12VRO1jttlVabY2?usp=sharing
-
-⚠️Though this was a team project in name, the actual implementation—including coding, cipher logic, and UI, clean code — was fully handled by me.
