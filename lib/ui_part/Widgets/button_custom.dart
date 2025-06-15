@@ -12,10 +12,10 @@ class ButtonCustom extends StatelessWidget {
       height: 40,
       child: ElevatedButton(
         onPressed: onPressed,
-        style: ElevatedButton.styleFrom(elevation: 0),
+        style: ElevatedButton.styleFrom(elevation: 0, backgroundColor: Color(0xffffa62b)),
         child: Text(
           "Check",
-          style: const TextStyle(fontSize: 14),
+          style: const TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.bold),
         ),
       ),
     );

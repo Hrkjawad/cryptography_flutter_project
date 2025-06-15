@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'home_page.dart';
 
@@ -11,13 +12,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Cryptography Project',
-      theme: ThemeData(
-        useMaterial3: false,
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+    return ProviderScope(
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Cryptography Project',
+        theme: ThemeData(
+          useMaterial3: true
+        ),
+        home: const HomePage(),
       ),
-      home: const HomePage(),
     );
   }
 }
