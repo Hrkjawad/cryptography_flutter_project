@@ -55,6 +55,12 @@ jobs:
 
       - name: Get dependencies
         run: flutter pub get
+        
+      - name: Install CocoaPods
+        run: |
+          sudo gem install cocoapods
+          cd ios
+          pod install
 
       - name: Build iOS (no codesign)
         run: flutter build ios --release --no-codesign
@@ -93,7 +99,7 @@ jobs:
       - name: Release to GitHub
         uses: ncipollo/release-action@v1
         with:
-          artifacts: ./artifacts/*.apk,./artifacts/*.ipa
+          artifacts: "build/app/outputs/apk/release/*,build/ios/iphoneos/app.ipa"
           tag: v1.0.${{ github.run_number }}
           token: ${{ secrets.TOKEN }}
           name: Release v1.0.${{ github.run_number }}
