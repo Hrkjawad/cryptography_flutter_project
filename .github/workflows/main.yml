@@ -42,7 +42,6 @@ jobs:
   build-ios:
     name: Build iOS IPA
     runs-on: macos-latest
-    needs: build-android
 
     steps:
       - name: Checkout code
@@ -93,7 +92,7 @@ jobs:
       - name: Release to GitHub
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "build/app/outputs/apk/release/*,build/ios/iphoneos/app.ipa"
+          artifacts: "./artifacts/*.apk,./artifacts/app.ipa"
           tag: v1.0.${{ github.run_number }}
           token: ${{ secrets.TOKEN }}
           name: Release v1.0.${{ github.run_number }}
