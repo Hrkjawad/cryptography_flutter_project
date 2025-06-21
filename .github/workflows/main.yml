@@ -8,34 +8,66 @@ on:
       - main
       - master
       - beta
+
 name: "Build & Release"
+
 jobs:
   build:
     name: Build & Release
     runs-on: macos-latest
+
     steps:
       - uses: actions/checkout@v3
+
       - uses: actions/setup-java@v3
         with:
           distribution: 'zulu'
           java-version: '17'
+
       - uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
           architecture: x64
 
-      - run: flutter build apk --release
-      - run: |
-          flutter build ios --no-codesign
+      - name: Install dependencies
+        run: flutter pub get
+
+      # ✅ Build Android APK
+      - name: Build Android APK
+        run: flutter build apk --release
+
+      # ✅ Build Android App Bundle (.aab)
+      - name: Build Android App Bundle
+        run: flutter build appbundle --release
+
+      # ✅ Build iOS (Device) .ipa
+      - name: Build iOS Device IPA
+        run: |
+          flutter build ios --release --no-codesign
           cd build/ios/iphoneos
-          mkdir Payload
-          cd Payload
-          ln -s ../Runner.app
-          cd ..
+          mkdir -p Payload
+          cp -r Runner.app Payload/
           zip -r app.ipa Payload
+
+      # ✅ Build iOS Simulator App (for Appetize.io)
+      - name: Build iOS Simulator .app
+        run: flutter build ios --simulator --debug
+
+      - name: Prepare Simulator .app for Appetize
+        run: |
+          mkdir -p appetize_upload
+          cp -r build/ios/iphonesimulator/Runner.app appetize_upload/
+          cd appetize_upload
+          zip -r app_simulator.zip Runner.app
+
+      # ✅ Upload All Artifacts to GitHub Release
       - name: Push to Releases
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "build/app/outputs/apk/release/*,build/ios/iphoneos/app.ipa"
+          artifacts: |
+            build/app/outputs/apk/release/*.apk,
+            build/app/outputs/bundle/release/*.aab,
+            build/ios/iphoneos/app.ipa,
+            appetize_upload/app_simulator.zip
           tag: v1.0.${{ github.run_number }}
           token: ${{ secrets.TOKEN }}
